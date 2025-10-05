@@ -1,51 +1,51 @@
-// src/components/mood/ModeSelector.jsx
+// src/components/mood/MoodSelector.jsx
 
-import { MODES, MODE_INFO } from '../../utils/constants';
+const MOODS = [
+  { emoji: '😊', label: 'Happy', value: 'happy' },
+  { emoji: '😔', label: 'Sad', value: 'sad' },
+  { emoji: '😰', label: 'Anxious', value: 'anxious' },
+  { emoji: '😴', label: 'Tired', value: 'tired' },
+  { emoji: '😡', label: 'Angry', value: 'angry' },
+  { emoji: '🤔', label: 'Curious', value: 'curious' }
+];
 
-function ModeSelector({ selectedMode, onModeChange }) {
-  // selectedMode - which mode is currently active
-  // onModeChange - function to call when user clicks a mode
-  
+function MoodSelector({ selectedMood, onMoodChange }) {
   return (
-    <div style={{ display: 'flex', gap: '16px', marginBottom: '24px' }}>
-      {/* Loop through each mode and create a button */}
-      {Object.values(MODES).map((mode) => {
-        const info = MODE_INFO[mode];
-        const isSelected = selectedMode === mode;
-        
-        return (
+    <div>
+      <h3 style={{ 
+        marginBottom: '16px', 
+        color: '#1F2937',
+        fontSize: '18px',
+        fontWeight: '600'
+      }}>
+        How are you feeling?
+      </h3>
+      <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
+        {MOODS.map((mood) => (
           <button
-            key={mode}
-            onClick={() => onModeChange(mode)}
+            key={mood.value}
+            onClick={() => onMoodChange(mood.value)}
             style={{
-              padding: '16px 24px',
-              border: isSelected ? `3px solid ${info.color}` : '2px solid #E5E7EB',
-              borderRadius: '12px',
-              backgroundColor: isSelected ? `${info.color}20` : 'white',
+              padding: '12px 20px',
+              border: 'none',
+              borderRadius: '8px',
+              backgroundColor: selectedMood === mood.value ? '#4F46E5' : '#F3F4F6',
+              color: selectedMood === mood.value ? 'white' : '#374151',
               cursor: 'pointer',
-              flex: 1,
-              textAlign: 'center',
-              transition: 'all 0.2s'
+              display: 'flex',
+              alignItems: 'center',
+              gap: '8px',
+              transition: 'all 0.2s ease',
+              fontWeight: selectedMood === mood.value ? '600' : 'normal'
             }}
           >
-            <div style={{ fontSize: '32px', marginBottom: '8px' }}>
-              {info.emoji}
-            </div>
-            <div style={{ 
-              fontSize: '18px', 
-              fontWeight: isSelected ? 'bold' : 'normal',
-              color: isSelected ? info.color : '#374151'
-            }}>
-              {info.name}
-            </div>
-            <div style={{ fontSize: '14px', color: '#6B7280', marginTop: '4px' }}>
-              {info.description}
-            </div>
+            <span style={{ fontSize: '20px' }}>{mood.emoji}</span>
+            <span style={{ fontSize: '14px' }}>{mood.label}</span>
           </button>
-        );
-      })}
+        ))}
+      </div>
     </div>
   );
 }
 
-export default ModeSelector;
+export default MoodSelector;
