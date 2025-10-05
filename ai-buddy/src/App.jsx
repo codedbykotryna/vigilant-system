@@ -2,6 +2,7 @@ import './App.css'
 import { useState } from 'react';
 import { MODES } from './utils/constants';
 import ModeSelector from './components/mood/MoodSelector';
+import ChatContainer from './components/chat/ChatContainer';
 
 function App() {
   // This function runs when button is clicked
@@ -16,11 +17,10 @@ function App() {
         selectedMode={currentMode}
         onModeChange={setCurrentMode}
       />
+
+      {/* Chat Interface */}
+      <ChatContainer mode={currentMode} />
       
-      {/* Show which mode is active */}
-      <p style={{ marginTop: '24px', color: '#6B7280' }}>
-        Current mode: <strong>{currentMode}</strong>
-      </p>
     </div>
   );
 }

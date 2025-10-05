@@ -1,29 +1,34 @@
-import {MODES, MODE_INFO} from '../../utils/constants'
+// src/components/mood/ModeSelector.jsx
 
-function ModeSelector({selectedMode, OnModeChange})
-{
-    return(
-        <div style={{display: 'flex', gap:'16px', marginBottom: '24px'}}>
-            {/* Loop through each mode and create a button */}
-            {Object.values(MODES).map((mode) => {
-                const info = MODE_INFO[mode];
-                const isSelected = selectedMode == mode;
-                return(
-                    <button
-                    key={mode}
-                    onClick={() => OnModeChange(mode)}
-                    style={{
-                        padding: '16px 24px',
-                        border: isSelected ? `3px solid ${info.color}` : '2px solid #E5E7EB',
-                        borderRadius: '12px',
-                        backgroundColor: isSelected ? `${info.color}20` : 'white',
-                        cursor: 'pointer',
-                        flex: 1,
-                        textAlign: 'center',
-                        transition: 'all 0.2s'
-                    }}
-                    >
-                        <div style={{ fontSize: '32px', marginBottom: '8px' }}>
+import { MODES, MODE_INFO } from '../../utils/constants';
+
+function ModeSelector({ selectedMode, onModeChange }) {
+  // selectedMode - which mode is currently active
+  // onModeChange - function to call when user clicks a mode
+  
+  return (
+    <div style={{ display: 'flex', gap: '16px', marginBottom: '24px' }}>
+      {/* Loop through each mode and create a button */}
+      {Object.values(MODES).map((mode) => {
+        const info = MODE_INFO[mode];
+        const isSelected = selectedMode === mode;
+        
+        return (
+          <button
+            key={mode}
+            onClick={() => onModeChange(mode)}
+            style={{
+              padding: '16px 24px',
+              border: isSelected ? `3px solid ${info.color}` : '2px solid #E5E7EB',
+              borderRadius: '12px',
+              backgroundColor: isSelected ? `${info.color}20` : 'white',
+              cursor: 'pointer',
+              flex: 1,
+              textAlign: 'center',
+              transition: 'all 0.2s'
+            }}
+          >
+            <div style={{ fontSize: '32px', marginBottom: '8px' }}>
               {info.emoji}
             </div>
             <div style={{ 
@@ -42,6 +47,5 @@ function ModeSelector({selectedMode, OnModeChange})
     </div>
   );
 }
-
 
 export default ModeSelector;
