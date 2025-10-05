@@ -10,6 +10,7 @@ import { MODES } from './utils/constants';
 function App() {
   const [currentMode, setCurrentMode] = useState(MODES.COMPANION);
   const [currentMood, setCurrentMood] = useState('happy');
+  const [isAnyLoading, setIsAnyLoading] = useState(false);
 
   return (
     <div style={{ 
@@ -78,7 +79,12 @@ function App() {
         </div>
         
         {/* Chat Interface */}
-        <ChatContainer mode={currentMode} mood={currentMood} />
+        <ChatContainer 
+          mode={currentMode} 
+          mood={currentMood}
+          isGlobalLoading={isAnyLoading}
+          setGlobalLoading={setIsAnyLoading}
+        />
         
         {/* Goals Panel - Only show in Mentor mode */}
         {currentMode === MODES.MENTOR && <GoalsPanel />}

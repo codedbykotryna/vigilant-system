@@ -1,6 +1,7 @@
 // src/services/storage.js
 
 const GOALS_KEY = 'ai_buddy_goals';
+const CHAT_KEY = 'ai_buddy_chat_history';
 
 // Get all goals from localStorage
 export function getGoals() {
@@ -64,4 +65,29 @@ export function completeGoal(goalId) {
     return goal;
   }
   return null;
+}
+
+// ========== CHAT HISTORY FUNCTIONS ==========
+
+// Get chat history for a specific mode
+export function getChatHistory(mode) {
+  const allHistory = localStorage.getItem(CHAT_KEY);
+  const history = allHistory ? JSON.parse(allHistory) : {};
+  return history[mode] || [];
+}
+
+// Save chat history for a specific mode
+export function saveChatHistory(mode, messages) {
+  const allHistory = localStorage.getItem(CHAT_KEY);
+  const history = allHistory ? JSON.parse(allHistory) : {};
+  history[mode] = messages;
+  localStorage.setItem(CHAT_KEY, JSON.stringify(history));
+}
+
+// Clear chat history for a specific mode
+export function clearChatHistory(mode) {
+  const allHistory = localStorage.getItem(CHAT_KEY);
+  const history = allHistory ? JSON.parse(allHistory) : {};
+  history[mode] = [];
+  localStorage.setItem(CHAT_KEY, JSON.stringify(history));
 }

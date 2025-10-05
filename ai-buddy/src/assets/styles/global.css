@@ -24,3 +24,22 @@ body {
 html {
   scroll-behavior: smooth;
 }
+
+/* Add this to your existing global.css */
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(0.8);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Apply animation to dots */
+.loading-dot {
+  animation: pulse 1.4s infinite;
+  font-size: 12px;
+}
